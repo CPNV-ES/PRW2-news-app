@@ -4,10 +4,17 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
+use Watson\Validating\ValidatingTrait;
 
 class Article extends Model
 {
+    use ValidatingTrait;
+
     protected $fillable = ['title', 'body', 'published_at', 'archived_at'];
+    protected $rules = [
+        'title' => 'required|max:255',
+        'body' => 'required',
+    ];
 
     public function comments()
     {

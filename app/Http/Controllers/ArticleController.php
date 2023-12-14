@@ -32,7 +32,7 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-        Article::create($request->all());
+        (new Article($request->all()))->saveOrFail();
         return redirect()->route('articles.index');
     }
 
@@ -57,7 +57,7 @@ class ArticleController extends Controller
      */
     public function update(Request $request, Article $article)
     {
-        $article->update($request->all());
+        $article->updateOrFail($request->all());
         return redirect()->route('articles.show', $article);
     }
 
